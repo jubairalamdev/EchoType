@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { IconButton } from "@/components/ui/IconButton";
 import { SlideCommit } from "@/components/micro/SlideCommit";
 import { Typewriter } from "@/components/micro/Typewriter";
-import { LatticeLoader } from "@/components/micro/LatticeLoader";
+import { OrbLoader } from "@/components/micro/OrbLoader";
 import { pushToast } from "@/components/micro/SwipeToast";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
 import { ModeSelect } from "@/features/landing/components/ModeSelect";
@@ -219,7 +219,7 @@ export default function Home() {
             </motion.section>
           )}
         </AnimatePresence>
-        {loading && <LatticeLoader text="Tuning the synth…" />}
+        {loading && <OrbLoader text="Tuning the synth…" />}
       </motion.main>
     );
   }
