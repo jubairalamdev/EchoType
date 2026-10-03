@@ -98,7 +98,7 @@ export function useTypingEngine({ prompt, freeform = false, onCorrect, onError, 
       }
 
       if (cur.length >= p.length) return;
-      const expected = p[cur];
+      const expected = p[cur.length];
       setTotalKeys((t) => t + 1);
       if (char === expected) {
         const next = cur + char;
