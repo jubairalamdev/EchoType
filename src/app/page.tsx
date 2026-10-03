@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -18,8 +18,30 @@ import type { TrackId } from "@/audio/tracks";
 import type { GameMode } from "@/data/tracksMeta";
 import { randomPrompt } from "@/data/passages";
 import type { GameStats } from "@/lib/metrics";
-import { appendHistory, loadBest, maybeSaveBest } from "@/lib/storage";
+import { appendHistory, loadBest, maybeSaveBest, type BestScore } from "@/lib/storage";
 import { cn } from "@/lib/cn";
+
+// Hydration-safe best score: server snapshot is always null, client reads
+// localStorage after mount. Cached so getSnapshot returns a stable ref.
+let bestCache: BestScore | null | undefined;
+
+function readBest(): BestScore | null {
+  const fresh = loadBest();
+  if (JSON.stringify(fresh) !== JSON.stringify(bestCache ?? null)) {
+    bestCache = fresh;
+  }
+  return bestCache ?? null;
+}
+
+function useBest(): BestScore | null {
+  const subscribe = useCallback((cb: () => void) => {
+    window.addEventListener("storage", cb);
+    return () => window.removeEventListener("storage", cb);
+  }, []);
+  const getSnapshot = useCallback(() => readBest(), []);
+  const getServerSnapshot = useCallback(() => null as BestScore | null, []);
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 type Step = 0 | 1 | 2;
 
@@ -53,6 +75,7 @@ export default function Home() {
   const [intervals, setIntervals] = useState<number[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [isBest, setIsBest] = useState(false);
+  const best = useBest();
 
   const begin = () => {
     setLoading(true);
@@ -103,7 +126,6 @@ export default function Home() {
   };
 
   if (!started) {
-    const best = loadBest();
     return (
       <motion.main
         id="main"
