@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
@@ -74,10 +74,14 @@ export default function Home() {
 
   if (!started) {
     return (
+      <AnimatePresence mode="wait">
       <motion.main
+        key="landing"
         className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-12"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.25 }}
       >
         <header className="text-center">
           <Badge>cyberpunk lo-fi typing synth</Badge>
@@ -96,11 +100,20 @@ export default function Home() {
           Start performance
         </Button>
       </motion.main>
+      </AnimatePresence>
     );
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12">
+    <AnimatePresence mode="wait">
+    <motion.main
+      key={`playing-${runId}`}
+      className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.25 }}
+    >
       <GameScreen
         key={`${runId}-${prompt}`}
         track={track}
@@ -120,6 +133,7 @@ export default function Home() {
         onNew={newPrompt}
         onExit={exit}
       />
-    </main>
+    </motion.main>
+    </AnimatePresence>
   );
 }
