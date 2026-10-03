@@ -113,11 +113,14 @@ export function GameScreen({
         onPressKey={(ch) => engine.pressKey(ch)}
         onBackspace={() => engine.handleBackspace()}
       />
-      <VirtualKeyboard
-        activeKey={engine.lastKey}
-        errorKey={engine.lastError}
-        errorNonce={engine.errorNonce}
-      />
+      {/* On-screen keyboard: mouse-driven devices only, hidden on touch */}
+      <div className="hidden [@media(hover:hover)_and_(pointer:fine)]:block">
+        <VirtualKeyboard
+          activeKey={engine.lastKey}
+          errorKey={engine.lastError}
+          errorNonce={engine.errorNonce}
+        />
+      </div>
       {freeform && (
         <Button onClick={finishFreeform} className="w-48">
           <Check className="h-4 w-4" aria-hidden="true" />

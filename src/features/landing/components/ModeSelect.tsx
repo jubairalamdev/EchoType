@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Code, Music, Quote } from "lucide-react";
+import { Check, Code, Music, Quote } from "lucide-react";
 import { MODE_META, type GameMode } from "@/data/tracksMeta";
 import { BorderBeam } from "@/components/magic/BorderBeam";
 import { cn } from "@/lib/cn";
@@ -45,7 +45,7 @@ export function ModeSelect({
                 className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#8b7cf6] to-[#5b8cff] text-white shadow-[0_0_16px_rgb(139_124_246/0.6)]"
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               >
-                <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
+                <Check className="h-3.5 w-3.5" aria-hidden="true" />
               </motion.span>
             )}
             <span

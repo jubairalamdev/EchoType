@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, MoonStar, Waves, Zap } from "lucide-react";
+import { Check, MoonStar, Waves, Zap } from "lucide-react";
 import { TRACKS } from "@/audio/tracks";
 import type { TrackId } from "@/audio/tracks";
 import { BorderBeam } from "@/components/magic/BorderBeam";
@@ -77,7 +77,7 @@ export function TrackSelect({
                 className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#8b7cf6] to-[#5b8cff] text-white shadow-[0_0_16px_rgb(139_124_246/0.6)]"
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               >
-                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                <Check className="h-4 w-4" aria-hidden="true" />
               </motion.span>
             )}
             <div className={cn("flex h-20 items-center bg-gradient-to-br p-4", mood.blob)}>
