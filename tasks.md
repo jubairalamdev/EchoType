@@ -43,10 +43,10 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 28. Wire replay (same prompt) + new prompt + back-to-landing
 
 ## Phase F — Polish + Ship
-- [ ] 29. Add Framer Motion screen transitions landing<->play<->results
-- [ ] 30. Accessibility: `prefers-reduced-motion`, focus rings, aria-live stats
-- [ ] 31. Manual QA matrix: 3 tracks x 3 modes, fast typing, Backspace, blur, mute, mobile
-- [ ] 32. `next build + lint` clean, README update, Vercel deploy check
+- [x] 29. Add Framer Motion screen transitions landing<->play<->results
+- [x] 30. Accessibility: `prefers-reduced-motion`, focus rings, aria-live stats
+- [x] 31. Manual QA matrix: 3 tracks x 3 modes, fast typing, Backspace, blur, mute, mobile
+- [x] 32. `next build + lint` clean, README update, Vercel deploy check
 
 ## Open decisions (answer before build)
 - [ ] Backing beats for MVP: full sequencer vs notes-only V1?
