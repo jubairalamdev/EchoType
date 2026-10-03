@@ -9,6 +9,7 @@ import { useRhythmTracker } from "@/features/game/hooks/useRhythmTracker";
 import { buildStats, calcAccuracy, calcWPM, type GameStats } from "@/lib/metrics";
 import { Button } from "@/components/ui/Button";
 import { HUD } from "@/features/game/components/HUD";
+import { TypeArea } from "@/features/game/components/TypeArea";
 
 // Task 19: container owning the session. TypeArea/Keyboard/Canvas/Settings
 // land in Tasks 20-23; placeholders keep the build green meanwhile.
@@ -90,12 +91,13 @@ export function GameScreen({
           Exit
         </Button>
       </div>
-      <div
-        data-testid="typearea-slot"
-        className="rounded-xl border border-white/10 bg-white/[0.03] p-4 font-mono text-sm whitespace-pre-wrap"
-      >
-        {freeform ? engine.typed || "Jam freely — every key sings." : prompt}
-      </div>
+      <TypeArea
+        prompt={prompt}
+        typed={engine.typed}
+        freeform={freeform}
+        onPressKey={(ch) => engine.pressKey(ch)}
+        onBackspace={() => engine.handleBackspace()}
+      />
       <div data-testid="keyboard-slot" className="text-xs text-zinc-500">
         VirtualKeyboard lands in Task 21 · last key: {engine.lastKey || "—"}
       </div>
