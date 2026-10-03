@@ -77,6 +77,7 @@ export default function Home() {
       <AnimatePresence mode="wait">
       <motion.main
         key="landing"
+        id="main"
         className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-12"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -108,6 +109,7 @@ export default function Home() {
     <AnimatePresence mode="wait">
     <motion.main
       key={`playing-${runId}`}
+      id="main"
       className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
