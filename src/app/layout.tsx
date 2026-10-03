@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { DotField } from "@/components/fx/DotField";
+import { SmoothCursor } from "@/components/magic/SmoothCursor";
 import { ToastHost } from "@/components/micro/SwipeToast";
 
 const geistSans = Geist({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to performance
         </a>
         <DotField />
+        <SmoothCursor />
         {children}
         <ToastHost />
       </body>

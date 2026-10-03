@@ -1,6 +1,7 @@
 "use client";
 
-import { MoonStar, Waves, Zap } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowDown, MoonStar, Waves, Zap } from "lucide-react";
 import { TRACKS } from "@/audio/tracks";
 import type { TrackId } from "@/audio/tracks";
 import { BorderBeam } from "@/components/magic/BorderBeam";
@@ -63,23 +64,21 @@ export function TrackSelect({
             )}
           >
             {active && (
-              <>
-                <BorderBeam
-                  duration={6}
-                  size={140}
-                  colorFrom={mood.from}
-                  colorTo={mood.to}
-                />
-                <BorderBeam
-                  duration={6}
-                  delay={3}
-                  size={140}
-                  borderWidth={2}
-                  colorFrom={mood.to}
-                  colorTo={mood.from}
-                  reverse
-                />
-              </>
+              <BorderBeam
+                duration={6}
+                size={240}
+                colorFrom={mood.from}
+                colorTo={mood.to}
+              />
+            )}
+            {active && (
+              <motion.span
+                layoutId="track-selected-arrow"
+                className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#8b7cf6] to-[#5b8cff] text-white shadow-[0_0_16px_rgb(139_124_246/0.6)]"
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              >
+                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              </motion.span>
             )}
             <div className={cn("flex h-20 items-center bg-gradient-to-br p-4", mood.blob)}>
               <Icon

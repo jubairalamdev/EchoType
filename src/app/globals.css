@@ -107,6 +107,12 @@ body {
   animation-iteration-count: infinite;
 }
 
+/* Spring cursor takes over the native one on fine pointers */
+.smooth-cursor,
+.smooth-cursor * {
+  cursor: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .border-beam-dot {
     animation: none;
