@@ -1,5 +1,7 @@
 "use client";
 
+import { freqForKey } from "@/audio/scales";
+
 // Task 6: Singleton wrapper around Web Audio.
 // Lazy AudioContext (autoplay policy), master gain + analyser for VisualizerCanvas.
 
@@ -71,6 +73,35 @@ class AudioEngine {
 
   setPatch(patch: TrackPatch) {
     this.patch = patch;
+  }
+
+  // Task 8: pitch-shifted pluck, 0.4s decay envelope.
+  playNote(key: string) {
+    const ctx = this.ensureCtx();
+    const master = this.getMaster();
+    if (!ctx || !master || key.length === 0) return;
+    if (ctx.state === "suspended") void ctx.resume();
+
+    const freq = freqForKey(key);
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = this.patch.wave;
+    osc.frequency.setValueAtTime(freq, t);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(this.patch.filterFreq, t);
+
+    gain.gain.setValueAtTime(0.12, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(master);
+
+    osc.start(t);
+    osc.stop(t + 0.4);
   }
 
   protected getContext(): AudioContext | null {
