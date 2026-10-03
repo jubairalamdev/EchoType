@@ -37,7 +37,7 @@ export function GameScreen({
     prompt,
     freeform,
     onCorrect: (k) => getAudioEngine().playNote(k),
-    onError: (k) => getAudioEngine().playError(),
+    onError: () => getAudioEngine().playError(),
     onTap: () => rhythm.tap(),
   });
 

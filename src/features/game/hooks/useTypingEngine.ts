@@ -31,18 +31,32 @@ export function useTypingEngine({ prompt, freeform = false, onCorrect, onError, 
   const pausedMsRef = useRef(0);
   const pauseStartRef = useRef<number | null>(null);
   const typedRef = useRef("");
-  typedRef.current = typed;
-
   const onCorrectRef = useRef(onCorrect);
-  onCorrectRef.current = onCorrect;
   const onErrorRef = useRef(onError);
-  onErrorRef.current = onError;
   const onTapRef = useRef(onTap);
-  onTapRef.current = onTap;
   const promptRef = useRef(prompt);
-  promptRef.current = prompt;
   const freeformRef = useRef(freeform);
-  freeformRef.current = freeform;
+
+  // Keep refs in sync without writing during render (react-compiler lint).
+  // Mounted per-prompt via key in GameScreen, so initial values are correct.
+  useEffect(() => {
+    typedRef.current = typed;
+  }, [typed]);
+  useEffect(() => {
+    onCorrectRef.current = onCorrect;
+  }, [onCorrect]);
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
+  useEffect(() => {
+    onTapRef.current = onTap;
+  }, [onTap]);
+  useEffect(() => {
+    promptRef.current = prompt;
+  }, [prompt]);
+  useEffect(() => {
+    freeformRef.current = freeform;
+  }, [freeform]);
 
   const nowElapsed = useCallback(() => {
     if (startRef.current === null) return 0;
@@ -138,12 +152,8 @@ export function useTypingEngine({ prompt, freeform = false, onCorrect, onError, 
     pauseStartRef.current = null;
   }, []);
 
-  // Reset when prompt changes.
-  const promptKey = prompt;
-  useEffect(() => {
-    reset();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [promptKey]);
+  // Fresh mount per prompt (GameScreen keys by runId+prompt), so no
+  // prompt-change reset effect needed here.
 
   // Global key listener (desktop). Mobile uses hidden input -> pressKey.
   useEffect(() => {

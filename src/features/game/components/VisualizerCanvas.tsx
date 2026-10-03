@@ -8,7 +8,10 @@ import { getAudioEngine } from "@/audio/AudioEngine";
 export function VisualizerCanvas({ pulse }: { pulse: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pulseRef = useRef(pulse);
-  pulseRef.current = pulse;
+
+  useEffect(() => {
+    pulseRef.current = pulse;
+  }, [pulse]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
