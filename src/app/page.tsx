@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { IconButton } from "@/components/ui/IconButton";
 import { SlideCommit } from "@/components/micro/SlideCommit";
+import { Typewriter } from "@/components/micro/Typewriter";
 import { LatticeLoader } from "@/components/micro/LatticeLoader";
 import { pushToast } from "@/components/micro/SwipeToast";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
@@ -151,7 +152,9 @@ export default function Home() {
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                 cyberpunk lo-fi typing synth
               </Badge>
-              <h1 className="text-6xl font-bold tracking-tight glow-violet">EchoType</h1>
+              <h1 className="min-h-[4.5rem] text-6xl font-bold tracking-tight glow-violet">
+                <Typewriter />
+              </h1>
               <p className="max-w-md text-zinc-400">
                 Type to make music. Every key is a note — pick a track, pick a
                 mode, and play the song with your fingers.
