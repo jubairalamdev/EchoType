@@ -28,13 +28,13 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 17. Implement `features/game/hooks/useRhythmTracker.ts`: inter-key ms array
 
 ## Phase D — Game UI
-- [ ] 18. Build landing `TrackSelect.tsx + ModeSelect.tsx` wired in `src/app/page.tsx`
-- [ ] 19. Build `features/game/components/GameScreen.tsx` container + `HUD.tsx` (live WPM/acc/combo)
-- [ ] 20. Build `features/game/components/TypeArea.tsx`: char render (correct/current/error), ripples, floating notes
-- [ ] 21. Build `features/game/components/VirtualKeyboard.tsx`: rows light up via Framer Motion, error shake
-- [ ] 22. Build `features/game/components/VisualizerCanvas.tsx`: rAF particles + analyser wave + resize handling
-- [ ] 23. Build `features/settings/components/SettingsBar.tsx`: volume, mute, patch select, reduce-motion
-- [ ] 24. Handle mobile hidden-input fallback + focus management
+- [x] 18. Build landing `TrackSelect.tsx + ModeSelect.tsx` wired in `src/app/page.tsx`
+- [x] 19. Build `features/game/components/GameScreen.tsx` container + `HUD.tsx` (live WPM/acc/combo)
+- [x] 20. Build `features/game/components/TypeArea.tsx`: char render (correct/current/error), ripples, floating notes
+- [x] 21. Build `features/game/components/VirtualKeyboard.tsx`: rows light up via Framer Motion, error shake
+- [x] 22. Build `features/game/components/VisualizerCanvas.tsx`: rAF particles + analyser wave + resize handling
+- [x] 23. Build `features/settings/components/SettingsBar.tsx`: volume, mute, patch select, reduce-motion
+- [x] 24. Handle mobile hidden-input fallback + focus management
 
 ## Phase E — Results
 - [ ] 25. Build `features/results/components/RhythmGraph.tsx` SVG from rhythm data
