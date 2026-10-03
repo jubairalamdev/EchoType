@@ -48,7 +48,7 @@ export function TypeArea({
 
   return (
     <div
-      className="relative rounded-xl border border-white/10 bg-black/40 p-5"
+      className="relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 p-5"
       onClick={() => inputRef.current?.focus()}
     >      <div className="pointer-events-none absolute -top-3 right-4 flex gap-1" aria-hidden="true">
         {ripples.map((r) => (
@@ -63,7 +63,7 @@ export function TypeArea({
           </motion.span>
         ))}
       </div>
-      <p className="font-mono text-lg leading-8" aria-label="Typing prompt">
+      <p className="font-mono text-lg leading-8 whitespace-pre-wrap break-words [overflow-wrap:anywhere]" aria-label="Typing prompt">
         {text.split("").map((ch, i) => {
           const done = i < typed.length;
           const current = i === typed.length;
