@@ -58,12 +58,14 @@ export default function Home() {
     setModalOpen(false);
     setStats(null);
     setRunId((n) => n + 1);
+    window.scrollTo({ top: 0 });
   };
   const newPrompt = () => {
     setPrompt(promptFor(mode));
     setModalOpen(false);
     setStats(null);
     setRunId((n) => n + 1);
+    window.scrollTo({ top: 0 });
   };
   const exit = () => {
     setModalOpen(false);
