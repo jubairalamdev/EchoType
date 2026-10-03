@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { Keyboard } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -10,18 +10,20 @@ interface Ripple {
   char: string;
 }
 
-// Task 20: character diff render + floating key ripples.
-// Task 24 (part): hidden input drives pressKey on mobile keyboards.
+// Ticker prompt: the next letter stays centered, upcoming letters slide in
+// from the right, typed letters fade out to the left. Newlines show as ⏎.
 export function TypeArea({
   prompt,
   typed,
   freeform = false,
+  errorNonce = 0,
   onPressKey,
   onBackspace,
 }: {
   prompt: string;
   typed: string;
   freeform?: boolean;
+  errorNonce?: number;
   onPressKey: (ch: string) => void;
   onBackspace: () => void;
 }) {
@@ -29,6 +31,13 @@ export function TypeArea({
   const idRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const prevLenRef = useRef(0);
+  const shake = useAnimation();
+
+  // Wrong-key shake via animation controls (effect -> external sync, lint-clean).
+  useEffect(() => {
+    if (errorNonce === 0) return;
+    shake.start({ x: [0, -5, 5, -3, 3, 0], transition: { duration: 0.3 } });
+  }, [errorNonce, shake]);
 
   useEffect(() => {
     if (typed.length > prevLenRef.current) {
@@ -45,13 +54,20 @@ export function TypeArea({
     prevLenRef.current = typed.length;
   }, [typed]);
 
-  const text = freeform ? typed || " " : prompt;
+  const raw = freeform ? typed : prompt;
+  const index = Math.min(typed.length, raw.length);
+  const display = (ch: string) => {
+    if (ch === "\n") return "⏎";
+    if (ch === " ") return " ";
+    return ch;
+  };
 
   return (
     <div
-      className="relative min-w-0 overflow-hidden rounded-[28px] border border-white/10 bg-black/40 p-5"
+      className="relative min-w-0 overflow-hidden rounded-[28px] border border-white/10 bg-black/40"
       onClick={() => inputRef.current?.focus()}
-    >      <div className="pointer-events-none absolute -top-3 right-4 flex gap-1" aria-hidden="true">
+    >
+      <div className="pointer-events-none absolute -top-1 right-6 flex gap-1" aria-hidden="true">
         {ripples.map((r) => (
           <motion.span
             key={r.id}
@@ -64,25 +80,59 @@ export function TypeArea({
           </motion.span>
         ))}
       </div>
-      <p className="font-mono text-lg leading-8 whitespace-pre-wrap break-words [overflow-wrap:anywhere]" aria-label="Typing prompt">
-        {text.split("").map((ch, i) => {
-          const done = i < typed.length;
-          const current = i === typed.length;
-          return (
-            <span
-              key={i}
-              className={cn(
-                done && "text-violet-200",
-                !done && !current && "text-zinc-500",
-                current && "typing-cursor bg-violet-400/20 text-white"
-              )}
-            >
-              {ch === " " ? " " : ch}
-            </span>
-          );
-        })}
-      </p>
-      <div className="mt-4 flex items-center gap-3">
+
+      <div className="relative overflow-hidden py-6" aria-label="Typing prompt">
+        {/* edge fades: typed letters dissolve left, upcoming emerge right */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-black/90 to-transparent"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-black/90 to-transparent"
+          aria-hidden="true"
+        />
+        {/* center caret */}
+        <div
+          className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-9 w-px -translate-x-1/2 -translate-y-1/2 bg-violet-300/70"
+          aria-hidden="true"
+        />
+        {raw.length === 0 ? (
+          <p className="px-6 text-center font-mono text-lg text-zinc-500">
+            Start typing — every key sings.
+          </p>
+        ) : (
+          <div
+            className="flex w-max font-mono text-2xl leading-10 transition-transform duration-150 ease-out"
+            style={{ paddingLeft: "50%", transform: `translateX(calc(-${index}ch - 0.5ch))` }}
+          >
+            {raw.split("").map((ch, i) => {
+              const done = i < typed.length;
+              const current = i === typed.length;
+              if (current) {
+                return (
+                  <motion.span
+                    key={i}
+                    animate={shake}
+                    className="whitespace-pre bg-violet-400/20 text-white typing-cursor"
+                  >
+                    {display(ch)}
+                  </motion.span>
+                );
+              }
+              return (
+                <span
+                  key={i}
+                  className={cn("whitespace-pre", done ? "text-violet-200/70" : "text-zinc-500")}
+                >
+                  {display(ch)}
+                </span>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div className="flex items-center gap-3 px-5 pb-4">
         <button
           className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-xs text-zinc-300 sm:hidden"
           onClick={() => inputRef.current?.focus()}

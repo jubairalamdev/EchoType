@@ -64,11 +64,11 @@ export function Aurora({
         float t = uTime;
         float warp = fbm(vec2(uv.x * 3.0 + t * 0.12, t * 0.08));
         float y = uv.y + (warp - 0.5) * 0.55 * uAmp;
-        float b0 = smoothstep(0.85, 0.0, abs(y - 0.32)) * (0.4 + 0.6 * fbm(uv * 4.0 + vec2(t * 0.18, 0.0)));
-        float b1 = smoothstep(0.85, 0.0, abs(y - 0.55)) * (0.4 + 0.6 * fbm(uv * 4.0 + vec2(-t * 0.14, t * 0.1)));
-        float glow = pow(fbm(uv * 2.0 - t * 0.04), 2.0) * 0.5;
+        float b0 = smoothstep(0.42, 0.0, abs(y - 0.30)) * (0.35 + 0.65 * fbm(uv * 4.0 + vec2(t * 0.18, 0.0)));
+        float b1 = smoothstep(0.42, 0.0, abs(y - 0.55)) * (0.35 + 0.65 * fbm(uv * 4.0 + vec2(-t * 0.14, t * 0.1)));
+        float glow = pow(fbm(uv * 2.0 - t * 0.04), 2.5) * 0.35;
         vec3 base = vec3(0.027, 0.027, 0.059);
-        vec3 col = base + (uC0 * b0 + uC1 * b1 + uC2 * glow) * uBlend;
+        vec3 col = base + (uC0 * b0 * 0.55 + uC1 * b1 * 0.55 + uC2 * glow * 0.5) * uBlend;
         gl_FragColor = vec4(col, 1.0);
       }
     `;

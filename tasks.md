@@ -53,3 +53,6 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 34. DotField backdrop app-wide, Aurora backdrop during game
 - [x] 35. SlideCommit start button, SwipeToast host, LatticeLoader overlay
 - [x] 36. `next build + lint` clean
+- [x] 37. Static dot grid (no pointer effects), dimmed Aurora bands (no white-out)
+- [x] 38. Removed in-game visualizer overlap (rhythm graph stays in results)
+- [x] 39. Ticker prompt: current letter centered, upcoming slides from right

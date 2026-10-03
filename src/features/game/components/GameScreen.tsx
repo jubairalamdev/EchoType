@@ -13,7 +13,6 @@ import { IconButton } from "@/components/ui/IconButton";
 import { HUD } from "@/features/game/components/HUD";
 import { TypeArea } from "@/features/game/components/TypeArea";
 import { VirtualKeyboard } from "@/features/game/components/VirtualKeyboard";
-import { VisualizerCanvas } from "@/features/game/components/VisualizerCanvas";
 import { SettingsBar } from "@/features/settings/components/SettingsBar";
 
 // Task 19: container owning the session. TypeArea/Keyboard/Canvas/Settings
@@ -92,7 +91,6 @@ export function GameScreen({
 
   return (
     <div className="relative flex flex-1 flex-col gap-4">
-      <VisualizerCanvas pulse={engine.totalKeys} />
       <div className="flex items-center gap-3">
         <HUD
           wpm={wpm}
@@ -111,6 +109,7 @@ export function GameScreen({
         prompt={prompt}
         typed={engine.typed}
         freeform={freeform}
+        errorNonce={engine.errorNonce}
         onPressKey={(ch) => engine.pressKey(ch)}
         onBackspace={() => engine.handleBackspace()}
       />
