@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { HUD } from "@/features/game/components/HUD";
 import { TypeArea } from "@/features/game/components/TypeArea";
 import { VirtualKeyboard } from "@/features/game/components/VirtualKeyboard";
+import { VisualizerCanvas } from "@/features/game/components/VisualizerCanvas";
 
 // Task 19: container owning the session. TypeArea/Keyboard/Canvas/Settings
 // land in Tasks 20-23; placeholders keep the build green meanwhile.
@@ -86,6 +87,7 @@ export function GameScreen({
 
   return (
     <div className="relative flex flex-1 flex-col gap-4">
+      <VisualizerCanvas pulse={engine.totalKeys} />
       <div className="flex items-center gap-3">
         <HUD wpm={wpm} accuracy={accuracy} combo={engine.combo} track={track} mode={mode} />
         <Button variant="ghost" onClick={onExit} className="ml-auto shrink-0">
