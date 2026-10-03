@@ -12,6 +12,7 @@ import { HUD } from "@/features/game/components/HUD";
 import { TypeArea } from "@/features/game/components/TypeArea";
 import { VirtualKeyboard } from "@/features/game/components/VirtualKeyboard";
 import { VisualizerCanvas } from "@/features/game/components/VisualizerCanvas";
+import { SettingsBar } from "@/features/settings/components/SettingsBar";
 
 // Task 19: container owning the session. TypeArea/Keyboard/Canvas/Settings
 // land in Tasks 20-23; placeholders keep the build green meanwhile.
@@ -94,6 +95,7 @@ export function GameScreen({
           Exit
         </Button>
       </div>
+      <SettingsBar />
       <TypeArea
         prompt={prompt}
         typed={engine.typed}
