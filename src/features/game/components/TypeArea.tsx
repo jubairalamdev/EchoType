@@ -91,11 +91,7 @@ export function TypeArea({
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-black/90 to-transparent"
           aria-hidden="true"
         />
-        {/* center caret glow (kept) + up arrow marking the letter */}
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-9 w-px -translate-x-1/2 -translate-y-1/2 bg-violet-300/70"
-          aria-hidden="true"
-        />
+        {/* up arrow marking the letter */}
         <motion.span
           className="pointer-events-none absolute bottom-1 left-1/2 z-10 -translate-x-1/2 text-violet-300 drop-shadow-[0_0_8px_rgb(139_124_246/0.8)]"
           aria-hidden="true"
