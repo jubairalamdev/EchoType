@@ -38,11 +38,11 @@ export function VirtualKeyboard({
                 }
                 transition={{ duration: 0.25 }}
                 className={cn(
-                  "flex h-9 w-9 items-center justify-center rounded-md border font-mono text-sm",
+                  "flex h-9 w-9 items-center justify-center rounded-xl border font-mono text-sm",
                   active
-                    ? "border-cyan-400 bg-cyan-400/20 text-cyan-200 glow-box-cyan"
+                    ? "border-violet-400 bg-violet-400/20 text-violet-100 glow-box-violet"
                     : "border-white/10 bg-white/[0.03] text-zinc-400",
-                  isErr && "border-[#ff2fb3] bg-[#ff2fb3]/20 text-[#ff7ac8]"
+                  isErr && "border-rose-400 bg-rose-400/20 text-rose-200"
                 )}
               >
                 {k}

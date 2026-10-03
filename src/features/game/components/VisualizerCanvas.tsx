@@ -54,7 +54,7 @@ export function VisualizerCanvas({ pulse }: { pulse: number }) {
           vx: (Math.random() - 0.5) * 1.6,
           vy: -(0.6 + Math.random() * 1.8),
           life: 1,
-          hue: Math.random() < 0.6 ? 190 : 320,
+          hue: Math.random() < 0.6 ? 250 : 220,
         });
       }
       parts = parts.slice(-220);
@@ -80,7 +80,7 @@ export function VisualizerCanvas({ pulse }: { pulse: number }) {
           if (i === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = "rgba(34,211,238,0.5)";
+        ctx.strokeStyle = "rgba(139,124,246,0.55)";
         ctx.lineWidth = 2 * devicePixelRatio;
         ctx.stroke();
       }
@@ -94,9 +94,9 @@ export function VisualizerCanvas({ pulse }: { pulse: number }) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, 2.2 * devicePixelRatio * p.life, 0, Math.PI * 2);
           ctx.fillStyle =
-            p.hue > 300
-              ? `rgba(255,47,179,${0.7 * p.life})`
-              : `rgba(34,211,238,${0.7 * p.life})`;
+            p.hue > 235
+              ? `rgba(139,124,246,${0.7 * p.life})`
+              : `rgba(91,140,255,${0.7 * p.life})`;
           ctx.fill();
         }
         parts = parts.filter((p) => p.life > 0);

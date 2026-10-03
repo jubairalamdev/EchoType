@@ -12,20 +12,20 @@ export const TRACK_META: Record<TrackId, TrackMeta> = {
   lofi: {
     id: "lofi",
     tagline: "Dusty chords, slow pulse",
-    gradient: "from-cyan-400/20 to-amber-200/10",
-    accent: "text-cyan-300",
+    gradient: "from-[#8b7cf6]/20 to-[#5b8cff]/10",
+    accent: "text-violet-300",
   },
   synthwave: {
     id: "synthwave",
     tagline: "Neon drive, bright edge",
-    gradient: "from-[#ff2fb3]/25 to-cyan-400/10",
-    accent: "text-[#ff7ac8]",
+    gradient: "from-[#5b8cff]/25 to-[#8b7cf6]/10",
+    accent: "text-[#b7a8ff]",
   },
   ambient: {
     id: "ambient",
     tagline: "Weightless wash",
-    gradient: "from-amber-200/15 to-cyan-400/10",
-    accent: "text-amber-200",
+    gradient: "from-[#b7a8ff]/15 to-[#5b8cff]/10",
+    accent: "text-violet-200",
   },
 };
 

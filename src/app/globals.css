@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-void: #0d1117;
-  --color-panel: #161b22;
-  --color-neon-cyan: #22d3ee;
-  --color-neon-magenta: #ff2fb3;
-  --color-neon-amber: #fbbf24;
+  --color-void: #07070f;
+  --color-panel: #12121f;
+  --color-neon-violet: #8b7cf6;
+  --color-neon-blue: #5b8cff;
+  --color-neon-soft: #b7a8ff;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 :root {
-  --background: #0d1117;
-  --foreground: #ededed;
+  --background: #07070f;
+  --foreground: #f1f0ff;
 }
 
 html,
@@ -27,15 +27,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Neon glow helpers */
-.glow-cyan {
-  text-shadow: 0 0 12px rgb(34 211 238 / 0.8), 0 0 42px rgb(34 211 238 / 0.35);
+/* Violet glow helpers */
+.glow-violet {
+  text-shadow: 0 0 12px rgb(139 124 246 / 0.8), 0 0 42px rgb(139 124 246 / 0.35);
 }
-.glow-magenta {
-  text-shadow: 0 0 12px rgb(255 47 179 / 0.8), 0 0 42px rgb(255 47 179 / 0.35);
+.glow-box-violet {
+  box-shadow: 0 0 18px rgb(139 124 246 / 0.35), inset 0 0 12px rgb(139 124 246 / 0.12);
 }
-.glow-box-cyan {
-  box-shadow: 0 0 18px rgb(34 211 238 / 0.35), inset 0 0 12px rgb(34 211 238 / 0.12);
+.glow-bar {
+  box-shadow: 0 0 16px rgb(139 124 246 / 0.55), 0 0 32px rgb(91 140 255 / 0.3);
 }
 
 /* Pulsing tube-light cursor */
@@ -43,11 +43,11 @@ body {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 12px rgb(34 211 238 / 0.9);
+    box-shadow: 0 0 12px rgb(139 124 246 / 0.9);
   }
   50% {
     opacity: 0.55;
-    box-shadow: 0 0 28px rgb(34 211 238 / 0.5);
+    box-shadow: 0 0 28px rgb(139 124 246 / 0.5);
   }
 }
 

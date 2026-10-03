@@ -19,7 +19,7 @@ export function Modal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -29,7 +29,7 @@ export function Modal({
             role="dialog"
             aria-modal="true"
             className={cn(
-              "w-full max-w-lg rounded-2xl border border-white/10 bg-[#161b22] p-6",
+              "w-full max-w-lg rounded-[28px] border border-white/10 bg-[#14141f] p-6 shadow-[0_8px_60px_rgb(139_124_246/0.25)]",
               className
             )}
             initial={{ scale: 0.92, y: 16 }}

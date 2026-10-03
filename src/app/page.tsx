@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
@@ -84,9 +85,16 @@ export default function Home() {
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.25 }}
       >
-        <header className="text-center">
-          <Badge>cyberpunk lo-fi typing synth</Badge>
-          <h1 className="mt-4 text-5xl font-bold tracking-tight glow-cyan">EchoType</h1>
+        <header className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] px-6 py-10 text-center">
+          <div
+            className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8b7cf6]/50 via-[#5b8cff]/40 to-transparent blur-3xl"
+            aria-hidden="true"
+          />
+          <Badge>
+            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+            cyberpunk lo-fi typing synth
+          </Badge>
+          <h1 className="mt-4 text-5xl font-bold tracking-tight glow-violet">EchoType</h1>
           <p className="mt-2 text-zinc-400">Type to make music. Every key is a note.</p>
         </header>
         <section className="flex flex-col gap-3">
@@ -97,7 +105,8 @@ export default function Home() {
           <h2 className="text-xs uppercase tracking-widest text-zinc-500">2 · Pick a mode</h2>
           <ModeSelect value={mode} onChange={setMode} />
         </section>
-        <Button onClick={start} className="mx-auto w-48 py-3 text-base">
+        <Button onClick={start} className="mx-auto w-56 py-3 text-base">
+          <Play className="h-4 w-4" aria-hidden="true" />
           Start performance
         </Button>
       </motion.main>

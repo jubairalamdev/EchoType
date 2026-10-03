@@ -11,13 +11,13 @@ export function Button({
   return (
     <button
       className={cn(
-        "rounded-full px-5 py-2.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 disabled:opacity-50",
         variant === "primary" &&
-          "bg-cyan-400 text-black hover:bg-cyan-300 glow-box-cyan",
+          "bg-gradient-to-r from-[#8b7cf6] to-[#5b8cff] text-white hover:brightness-110 glow-box-violet",
         variant === "ghost" &&
           "border border-white/15 text-zinc-100 hover:bg-white/5",
         variant === "danger" &&
-          "bg-[#ff2fb3] text-black hover:brightness-110",
+          "bg-gradient-to-r from-[#f43f5e] to-[#8b7cf6] text-white hover:brightness-110",
         className
       )}
       {...props}

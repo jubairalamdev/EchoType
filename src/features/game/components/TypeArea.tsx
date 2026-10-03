@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Keyboard } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 interface Ripple {
@@ -48,13 +49,13 @@ export function TypeArea({
 
   return (
     <div
-      className="relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 p-5"
+      className="relative min-w-0 overflow-hidden rounded-[28px] border border-white/10 bg-black/40 p-5"
       onClick={() => inputRef.current?.focus()}
     >      <div className="pointer-events-none absolute -top-3 right-4 flex gap-1" aria-hidden="true">
         {ripples.map((r) => (
           <motion.span
             key={r.id}
-            className="key-ripple text-lg font-bold text-cyan-300"
+            className="key-ripple text-lg font-bold text-violet-300"
             initial={{ y: 6, opacity: 0.9, scale: 0.7 }}
             animate={{ y: -26, opacity: 0, scale: 1.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -71,9 +72,9 @@ export function TypeArea({
             <span
               key={i}
               className={cn(
-                done && "text-cyan-300",
+                done && "text-violet-200",
                 !done && !current && "text-zinc-500",
-                current && "typing-cursor bg-cyan-400/20 text-white"
+                current && "typing-cursor bg-violet-400/20 text-white"
               )}
             >
               {ch === " " ? " " : ch}
@@ -83,9 +84,10 @@ export function TypeArea({
       </p>
       <div className="mt-4 flex items-center gap-3">
         <button
-          className="rounded-full border border-white/15 px-4 py-1.5 text-xs text-zinc-300 sm:hidden"
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-xs text-zinc-300 sm:hidden"
           onClick={() => inputRef.current?.focus()}
         >
+          <Keyboard className="h-4 w-4" aria-hidden="true" />
           Tap to open keyboard
         </button>
         <input

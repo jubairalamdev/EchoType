@@ -7,7 +7,9 @@ import type { GameMode } from "@/data/tracksMeta";
 import { useTypingEngine } from "@/features/game/hooks/useTypingEngine";
 import { useRhythmTracker } from "@/features/game/hooks/useRhythmTracker";
 import { buildStats, calcAccuracy, calcWPM, type GameStats } from "@/lib/metrics";
+import { Check, Home } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { IconButton } from "@/components/ui/IconButton";
 import { HUD } from "@/features/game/components/HUD";
 import { TypeArea } from "@/features/game/components/TypeArea";
 import { VirtualKeyboard } from "@/features/game/components/VirtualKeyboard";
@@ -86,14 +88,23 @@ export function GameScreen({
     );
   };
 
+  const progress = freeform ? 0 : prompt.length > 0 ? engine.index / prompt.length : 0;
+
   return (
     <div className="relative flex flex-1 flex-col gap-4">
       <VisualizerCanvas pulse={engine.totalKeys} />
       <div className="flex items-center gap-3">
-        <HUD wpm={wpm} accuracy={accuracy} combo={engine.combo} track={track} mode={mode} />
-        <Button variant="ghost" onClick={onExit} className="ml-auto shrink-0">
-          Exit
-        </Button>
+        <HUD
+          wpm={wpm}
+          accuracy={accuracy}
+          combo={engine.combo}
+          progress={progress}
+          track={track}
+          mode={mode}
+        />
+        <IconButton label="Home" onClick={onExit}>
+          <Home className="h-5 w-5" />
+        </IconButton>
       </div>
       <SettingsBar />
       <TypeArea
@@ -110,6 +121,7 @@ export function GameScreen({
       />
       {freeform && (
         <Button onClick={finishFreeform} className="w-48">
+          <Check className="h-4 w-4" aria-hidden="true" />
           Finish jam
         </Button>
       )}

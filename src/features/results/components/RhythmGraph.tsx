@@ -21,8 +21,8 @@ export function RhythmGraph({ intervals }: { intervals: number[] }) {
   return (
     <div>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg bg-black/40" role="img" aria-label="Typing rhythm graph">
-        <line x1={0} y1={avgY} x2={W} y2={avgY} stroke="rgba(255,47,179,0.5)" strokeDasharray="4 4" />
-        <polyline points={pts} fill="none" stroke="rgba(34,211,238,0.9)" strokeWidth="2" />
+        <line x1={0} y1={avgY} x2={W} y2={avgY} stroke="rgba(91,140,255,0.5)" strokeDasharray="4 4" />
+        <polyline points={pts} fill="none" stroke="rgba(139,124,246,0.9)" strokeWidth="2" />
       </svg>
       <p className="mt-1 text-xs text-zinc-500">avg gap {Math.round(avg)}ms · lower = steadier flow</p>
     </div>
