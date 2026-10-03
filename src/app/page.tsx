@@ -6,16 +6,19 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
 import { ModeSelect } from "@/features/landing/components/ModeSelect";
+import { GameScreen } from "@/features/game/components/GameScreen";
 import type { TrackId } from "@/audio/tracks";
 import type { GameMode } from "@/data/tracksMeta";
 import { randomQuote } from "@/data/quotes";
 import { randomSnippet } from "@/data/codeSnippets";
+import type { GameStats } from "@/lib/metrics";
 
 export default function Home() {
   const [track, setTrack] = useState<TrackId>("lofi");
   const [mode, setMode] = useState<GameMode>("quote");
   const [started, setStarted] = useState(false);
   const [prompt, setPrompt] = useState("");
+  const [lastStats, setLastStats] = useState<GameStats | null>(null);
 
   const start = () => {
     const text =
@@ -25,6 +28,7 @@ export default function Home() {
           ? randomSnippet().text
           : "";
     setPrompt(text);
+    setLastStats(null);
     setStarted(true);
   };
 
@@ -57,15 +61,18 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12">
-      <p className="text-sm text-zinc-400">
-        Track: {track} · Mode: {mode}
-      </p>
-      <p className="rounded-xl border border-white/10 bg-white/[0.03] p-4 font-mono text-sm">
-        {prompt || "Freeform jam — GameScreen lands in Task 19."}
-      </p>
-      <Button variant="ghost" onClick={() => setStarted(false)} className="w-40">
-        Back
-      </Button>
+      <GameScreen
+        track={track}
+        mode={mode}
+        prompt={prompt}
+        onExit={() => setStarted(false)}
+        onFinish={(stats) => setLastStats(stats)}
+      />
+      {lastStats && (
+        <p className="text-sm text-zinc-400" aria-live="polite">
+          Done: {lastStats.wpm} WPM · {lastStats.accuracy}% · x{lastStats.maxCombo} (ResultModal lands in Task 26)
+        </p>
+      )}
     </main>
   );
 }
