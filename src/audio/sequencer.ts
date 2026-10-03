@@ -8,7 +8,8 @@ export interface BeatHandle {
   stop: () => void;
 }
 
-export function startBeat(_track: TrackId): BeatHandle {
+export function startBeat(track: TrackId): BeatHandle {
   // TODO(Phase B+): lookahead step sequencer (kick/hat/pad via oscillators).
+  void track;
   return { stop: () => {} };
 }
