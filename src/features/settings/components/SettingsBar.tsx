@@ -5,8 +5,9 @@ import { Volume2, VolumeX } from "lucide-react";
 import { getAudioEngine } from "@/audio/AudioEngine";
 import { loadSettings, saveSettings, type Settings } from "@/lib/storage";
 import { IconButton } from "@/components/ui/IconButton";
+import { WakeSlider } from "@/components/magic/WakeSlider";
 
-// Volume + mute. Persists to LocalStorage.
+// Volume as a wake bar + mute. Persists to LocalStorage.
 export function SettingsBar() {
   const [s, setS] = useState<Settings>(() => {
     const loaded = loadSettings();
@@ -27,17 +28,22 @@ export function SettingsBar() {
 
   return (
     <div className="flex items-center gap-3 text-xs text-zinc-400">
-      <Volume2 className="h-4 w-4 text-violet-300" aria-hidden="true" />
-      <input
-        type="range"
-        min={0}
-        max={1}
-        step={0.05}
-        value={s.volume}
-        onChange={(e) => update({ volume: Number(e.target.value) })}
-        aria-label="Volume"
-        className="accent-violet-400"
-      />
+      <Volume2 className="h-4 w-4 shrink-0 text-violet-300" aria-hidden="true" />
+      <div className="min-w-0 flex-1">
+        <WakeSlider
+          value={Math.round(s.volume * 100)}
+          onChange={(v) => update({ volume: v / 100 })}
+          bars={24}
+          height={40}
+          restHeight={10}
+          fillColor="#8b7cf6"
+          trackColor="#23232f"
+          crestColor="#5b8cff"
+          ariaLabel="Volume"
+          showValue
+          formatValue={(v) => `${v}%`}
+        />
+      </div>
       <IconButton
         label={s.muted ? "Unmute" : "Mute"}
         onClick={() => update({ muted: !s.muted })}
