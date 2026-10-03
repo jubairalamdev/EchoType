@@ -2,6 +2,7 @@
 
 import { Code, Music, Quote } from "lucide-react";
 import { MODE_META, type GameMode } from "@/data/tracksMeta";
+import { BorderBeam } from "@/components/magic/BorderBeam";
 import { cn } from "@/lib/cn";
 
 const ORDER: { id: GameMode; Icon: typeof Music }[] = [
@@ -28,12 +29,15 @@ export function ModeSelect({
             aria-checked={active}
             onClick={() => onChange(id)}
             className={cn(
-              "flex items-center gap-3 rounded-[28px] border p-4 text-left transition-all",
+              "relative flex items-center gap-3 rounded-[28px] border p-4 text-left transition-colors",
               active
-                ? "border-violet-400/70 bg-violet-400/10 glow-box-violet"
+                ? "border-violet-300/40 bg-violet-400/10"
                 : "border-white/10 bg-white/[0.02] hover:border-white/25"
             )}
           >
+            {active && (
+              <BorderBeam duration={6} size={120} colorFrom="#8b7cf6" colorTo="#5b8cff" />
+            )}
             <span
               className={cn(
                 "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl",

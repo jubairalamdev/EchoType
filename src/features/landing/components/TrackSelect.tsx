@@ -3,18 +3,38 @@
 import { MoonStar, Waves, Zap } from "lucide-react";
 import { TRACKS } from "@/audio/tracks";
 import type { TrackId } from "@/audio/tracks";
+import { BorderBeam } from "@/components/magic/BorderBeam";
 import { cn } from "@/lib/cn";
 
-const ICONS: Record<TrackId, typeof Waves> = {
-  lofi: MoonStar,
-  synthwave: Zap,
-  ambient: Waves,
-};
-
-const BLOB: Record<TrackId, string> = {
-  lofi: "from-[#8b7cf6]/70 via-[#5b8cff]/40 to-transparent",
-  synthwave: "from-[#5b8cff]/70 via-[#8b7cf6]/40 to-transparent",
-  ambient: "from-[#b7a8ff]/60 via-[#5b8cff]/30 to-transparent",
+// Each track carries its own mood — cozy dusk, neon drive, deep drift.
+const MOOD: Record<
+  TrackId,
+  { Icon: typeof Waves; blob: string; icon: string; border: string; from: string; to: string }
+> = {
+  lofi: {
+    Icon: MoonStar,
+    blob: "from-amber-400/50 via-orange-400/25 to-transparent",
+    icon: "text-amber-200",
+    border: "border-amber-300/40",
+    from: "#fbbf24",
+    to: "#fb9235",
+  },
+  synthwave: {
+    Icon: Zap,
+    blob: "from-fuchsia-500/50 via-cyan-400/30 to-transparent",
+    icon: "text-pink-200",
+    border: "border-pink-400/40",
+    from: "#ff2fb3",
+    to: "#22d3ee",
+  },
+  ambient: {
+    Icon: Waves,
+    blob: "from-sky-400/50 via-teal-300/25 to-transparent",
+    icon: "text-sky-200",
+    border: "border-sky-300/40",
+    from: "#5b8cff",
+    to: "#2dd4bf",
+  },
 };
 
 export function TrackSelect({
@@ -28,7 +48,8 @@ export function TrackSelect({
     <div className="grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Backing track">
       {(Object.keys(TRACKS) as TrackId[]).map((id) => {
         const t = TRACKS[id];
-        const Icon = ICONS[id];
+        const mood = MOOD[id];
+        const Icon = mood.Icon;
         const active = value === id;
         return (
           <button
@@ -37,14 +58,34 @@ export function TrackSelect({
             aria-checked={active}
             onClick={() => onChange(id)}
             className={cn(
-              "overflow-hidden rounded-[28px] border text-left transition-all",
-              active
-                ? "border-violet-400/70 glow-box-violet"
-                : "border-white/10 hover:border-white/25"
+              "relative overflow-hidden rounded-[28px] border text-left transition-colors",
+              active ? mood.border : "border-white/10 hover:border-white/25"
             )}
           >
-            <div className={cn("flex h-20 items-center bg-gradient-to-br p-4", BLOB[id])}>
-              <Icon className="h-7 w-7 text-white drop-shadow-[0_0_12px_rgb(0_0_0/0.6)]" aria-hidden="true" />
+            {active && (
+              <>
+                <BorderBeam
+                  duration={6}
+                  size={140}
+                  colorFrom={mood.from}
+                  colorTo={mood.to}
+                />
+                <BorderBeam
+                  duration={6}
+                  delay={3}
+                  size={140}
+                  borderWidth={2}
+                  colorFrom={mood.to}
+                  colorTo={mood.from}
+                  reverse
+                />
+              </>
+            )}
+            <div className={cn("flex h-20 items-center bg-gradient-to-br p-4", mood.blob)}>
+              <Icon
+                className={cn("h-7 w-7 drop-shadow-[0_0_12px_rgb(0_0_0/0.6)]", mood.icon)}
+                aria-hidden="true"
+              />
             </div>
             <div className="bg-[#101018] p-4">
               <div className="text-sm font-semibold text-zinc-100">{t.name}</div>

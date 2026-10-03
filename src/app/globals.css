@@ -89,6 +89,30 @@ body {
   animation: lattice-pulse 1.2s ease-in-out infinite;
 }
 
+/* Traveling border beam (selected cards) */
+@keyframes border-beam {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+.border-beam-dot {
+  animation-name: border-beam;
+  animation-duration: var(--beam-duration, 6s);
+  animation-delay: var(--beam-delay, 0s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam-dot {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .typing-cursor,
   .key-ripple {
