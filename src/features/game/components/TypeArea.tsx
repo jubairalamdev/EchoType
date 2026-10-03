@@ -47,8 +47,10 @@ export function TypeArea({
   const text = freeform ? typed || " " : prompt;
 
   return (
-    <div className="relative rounded-xl border border-white/10 bg-black/40 p-5">
-      <div className="pointer-events-none absolute -top-3 right-4 flex gap-1" aria-hidden="true">
+    <div
+      className="relative rounded-xl border border-white/10 bg-black/40 p-5"
+      onClick={() => inputRef.current?.focus()}
+    >      <div className="pointer-events-none absolute -top-3 right-4 flex gap-1" aria-hidden="true">
         {ripples.map((r) => (
           <motion.span
             key={r.id}
