@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, Copy, Home, RotateCcw, Shuffle } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { IconButton } from "@/components/ui/IconButton";
+import { pushToast } from "@/components/micro/SwipeToast";
 import { RhythmGraph } from "@/features/results/components/RhythmGraph";
 import type { GameStats } from "@/lib/metrics";
 import type { TrackId } from "@/audio/tracks";
@@ -42,9 +43,11 @@ export function ResultModal({
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      pushToast("Result copied to clipboard");
       window.setTimeout(() => setCopied(false), 1500);
     } catch {
       setCopied(false);
+      pushToast("Copy failed in this browser");
     }
   };
 

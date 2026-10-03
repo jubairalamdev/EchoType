@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { DotField } from "@/components/fx/DotField";
+import { ToastHost } from "@/components/micro/SwipeToast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to performance
         </a>
+        <DotField />
         {children}
+        <ToastHost />
       </body>
     </html>
   );

@@ -48,8 +48,8 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 31. Manual QA matrix: 3 tracks x 3 modes, fast typing, Backspace, blur, mute, mobile
 - [x] 32. `next build + lint` clean, README update, Vercel deploy check
 
-## Open decisions (answer before build)
-- [ ] Backing beats for MVP: full sequencer vs notes-only V1?
-- [ ] Backspace counts as error or neutral? Timer pause on blur?
-- [ ] Share = copy-text only or PNG export too?
-- [ ] Single `page.tsx` state machine vs `/play` route for V1?
+## Phase G — Onboarding + ReactBits ambience
+- [x] 33. Home as 3-step onboarding (welcome -> track -> mode with slide-to-start)
+- [x] 34. DotField backdrop app-wide, Aurora backdrop during game
+- [x] 35. SlideCommit start button, SwipeToast host, LatticeLoader overlay
+- [x] 36. `next build + lint` clean
