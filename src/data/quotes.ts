@@ -13,7 +13,7 @@ function difficultyOf(text: string): Quote["difficulty"] {
   return "hard";
 }
 
-// Single source of truth: data.json (sentences + paragraphs).
+// Single source of truth: data.json (30 paragraphs, 2-3 lines each).
 export const QUOTES: Quote[] = (data as { id: string; kind: string; text: string; source: string }[])
   .filter((p) => p.kind !== "code")
   .map((p) => ({ id: p.id, text: p.text, author: p.source, difficulty: difficultyOf(p.text) }));
