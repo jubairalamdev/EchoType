@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { IconButton } from "@/components/ui/IconButton";
-import { Aurora } from "@/components/fx/Aurora";
 import { SlideCommit } from "@/components/micro/SlideCommit";
 import { LatticeLoader } from "@/components/micro/LatticeLoader";
 import { pushToast } from "@/components/micro/SwipeToast";
@@ -201,15 +200,13 @@ export default function Home() {
   }
 
   return (
-    <>
-      <Aurora colorStops={["#8b7cf6", "#5b8cff", "#3b2d8f"]} amplitude={1} blend={0.55} speed={0.6} />
-      <motion.main
-        id="main"
-        className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-      >
+    <motion.main
+      id="main"
+      className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+    >
         <GameScreen
           key={`${runId}-${prompt}`}
           track={track}
@@ -230,6 +227,5 @@ export default function Home() {
           onExit={exit}
         />
       </motion.main>
-    </>
   );
 }
