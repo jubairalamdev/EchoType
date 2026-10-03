@@ -130,7 +130,7 @@ export default function Home() {
     return (
       <motion.main
         id="main"
-        className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-12"
+        className="m-auto flex w-full max-w-3xl flex-col gap-8 px-6 py-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -227,7 +227,7 @@ export default function Home() {
   return (
     <motion.main
       id="main"
-      className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12"
+      className="m-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-12"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
