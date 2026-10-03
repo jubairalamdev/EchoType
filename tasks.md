@@ -20,12 +20,12 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 11. Implement backing-beat step sequencer start/stop (or stub if deferred)
 
 ## Phase C — Data + Core Logic
-- [ ] 12. Seed `data/quotes.ts (20), data/codeSnippets.ts (15), data/tracksMeta.ts`
-- [ ] 13. Implement `lib/keyboard.ts`: normalize + ignore Shift/Ctrl/Alt
-- [ ] 14. Implement `lib/metrics.ts`: WPM, accuracy, combo (pure functions)
-- [ ] 15. Implement `lib/storage.ts`: `echotype:settings, echotype:best, echotype:history` localStorage helpers
-- [ ] 16. Implement `features/game/hooks/useTypingEngine.ts`: keydown, diff, timer, correct/error callbacks
-- [ ] 17. Implement `features/game/hooks/useRhythmTracker.ts`: inter-key ms array
+- [x] 12. Seed `data/quotes.ts (20), data/codeSnippets.ts (15), data/tracksMeta.ts`
+- [x] 13. Implement `lib/keyboard.ts`: normalize + ignore Shift/Ctrl/Alt
+- [x] 14. Implement `lib/metrics.ts`: WPM, accuracy, combo (pure functions)
+- [x] 15. Implement `lib/storage.ts`: `echotype:settings, echotype:best, echotype:history` localStorage helpers
+- [x] 16. Implement `features/game/hooks/useTypingEngine.ts`: keydown, diff, timer, correct/error callbacks
+- [x] 17. Implement `features/game/hooks/useRhythmTracker.ts`: inter-key ms array
 
 ## Phase D — Game UI
 - [ ] 18. Build landing `TrackSelect.tsx + ModeSelect.tsx` wired in `src/app/page.tsx`
