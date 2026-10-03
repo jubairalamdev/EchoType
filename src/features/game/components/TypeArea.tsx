@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Keyboard } from "lucide-react";
+import { ArrowUp, Keyboard } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 interface Ripple {
@@ -91,11 +91,19 @@ export function TypeArea({
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-black/90 to-transparent"
           aria-hidden="true"
         />
-        {/* center caret */}
+        {/* center caret glow (kept) + up arrow marking the letter */}
         <div
           className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-9 w-px -translate-x-1/2 -translate-y-1/2 bg-violet-300/70"
           aria-hidden="true"
         />
+        <motion.span
+          className="pointer-events-none absolute bottom-1 left-1/2 z-10 -translate-x-1/2 text-violet-300 drop-shadow-[0_0_8px_rgb(139_124_246/0.8)]"
+          aria-hidden="true"
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowUp className="h-4 w-4" />
+        </motion.span>
         {raw.length === 0 ? (
           <p className="px-6 text-center font-mono text-lg text-zinc-500">
             Start typing — every key sings.
@@ -113,7 +121,7 @@ export function TypeArea({
                   <motion.span
                     key={i}
                     animate={shake}
-                    className="whitespace-pre bg-violet-400/20 text-white typing-cursor"
+                    className="whitespace-pre text-white"
                   >
                     {display(ch)}
                   </motion.span>
