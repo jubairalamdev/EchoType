@@ -12,12 +12,12 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 5. Create reusable `components/ui/Button.tsx, Card.tsx, Modal.tsx, Badge.tsx`
 
 ## Phase B — Audio Engine (Raw Web Audio, A-minor)
-- [ ] 6. Implement `audio/AudioEngine.ts` singleton: lazy AudioContext, master gain, analyser, resume()
-- [ ] 7. Implement `audio/scales.ts`: A-minor 2-octave key->freq map + fallback hash
-- [ ] 8. Implement `playNote(key, trackPatch)` with envelope `0.12 -> 0.0001 / 0.4s`
-- [ ] 9. Implement `playError()` low thud + `setVolume/mute/setPatch()`
-- [ ] 10. Implement `audio/tracks.ts`: Lo-Fi / Synthwave / Ambient `{bpm, wave, filter, beatPattern}`
-- [ ] 11. Implement backing-beat step sequencer start/stop (or stub if deferred)
+- [x] 6. Implement `audio/AudioEngine.ts` singleton: lazy AudioContext, master gain, analyser, resume()
+- [x] 7. Implement `audio/scales.ts`: A-minor 2-octave key->freq map + fallback hash
+- [x] 8. Implement `playNote(key, trackPatch)` with envelope `0.12 -> 0.0001 / 0.4s`
+- [x] 9. Implement `playError()` low thud + `setVolume/mute/setPatch()`
+- [x] 10. Implement `audio/tracks.ts`: Lo-Fi / Synthwave / Ambient `{bpm, wave, filter, beatPattern}`
+- [x] 11. Implement backing-beat step sequencer start/stop (or stub if deferred)
 
 ## Phase C — Data + Core Logic
 - [ ] 12. Seed `data/quotes.ts (20), data/codeSnippets.ts (15), data/tracksMeta.ts`
