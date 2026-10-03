@@ -5,11 +5,11 @@ Stack locked: Next.js 16 App Router + React 19 + TS + Tailwind v4 + Framer Motio
 Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 
 ## Phase A — Setup
-- [ ] 1. Install `framer-motion, clsx, tailwind-merge`, verify `next dev` + `next build` passes
-- [ ] 2. Replace `src/app/globals.css` with dark `#0d1117` base + Tailwind v4 `@theme` neon tokens (cyan/magenta/amber) + glow utilities + cursor pulse keyframes
-- [ ] 3. Update `src/app/layout.tsx` metadata/title/fonts for EchoType
-- [ ] 4. Create folder skeleton `features/*, audio/*, components/ui/*, data/*, lib/*`
-- [ ] 5. Create reusable `components/ui/Button.tsx, Card.tsx, Modal.tsx, Badge.tsx`
+- [x] 1. Install `framer-motion, clsx, tailwind-merge`, verify `next dev` + `next build` passes
+- [x] 2. Replace `src/app/globals.css` with dark `#0d1117` base + Tailwind v4 `@theme` neon tokens (cyan/magenta/amber) + glow utilities + cursor pulse keyframes
+- [x] 3. Update `src/app/layout.tsx` metadata/title/fonts for EchoType
+- [x] 4. Create folder skeleton `features/*, audio/*, components/ui/*, data/*, lib/*`
+- [x] 5. Create reusable `components/ui/Button.tsx, Card.tsx, Modal.tsx, Badge.tsx`
 
 ## Phase B — Audio Engine (Raw Web Audio, A-minor)
 - [ ] 6. Implement `audio/AudioEngine.ts` singleton: lazy AudioContext, master gain, analyser, resume()
