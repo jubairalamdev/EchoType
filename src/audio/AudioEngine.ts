@@ -104,6 +104,31 @@ class AudioEngine {
     osc.stop(t + 0.4);
   }
 
+  // Task 9: muted low thud for wrong keys (breaks combo feel).
+  playError() {
+    const ctx = this.ensureCtx();
+    const master = this.getMaster();
+    if (!ctx || !master) return;
+    if (ctx.state === "suspended") void ctx.resume();
+
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(90, t);
+    osc.frequency.exponentialRampToValueAtTime(55, t + 0.15);
+
+    gain.gain.setValueAtTime(0.14, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.15);
+
+    osc.connect(gain);
+    gain.connect(master);
+
+    osc.start(t);
+    osc.stop(t + 0.16);
+  }
+
   protected getContext(): AudioContext | null {
     return this.ensureCtx();
   }
