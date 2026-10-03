@@ -1,35 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { TrackSelect } from "@/features/landing/components/TrackSelect";
 import { ModeSelect } from "@/features/landing/components/ModeSelect";
 import { GameScreen } from "@/features/game/components/GameScreen";
+import { ResultModal } from "@/features/results/components/ResultModal";
 import type { TrackId } from "@/audio/tracks";
 import type { GameMode } from "@/data/tracksMeta";
 import { randomQuote } from "@/data/quotes";
 import { randomSnippet } from "@/data/codeSnippets";
 import type { GameStats } from "@/lib/metrics";
+import { appendHistory, maybeSaveBest } from "@/lib/storage";
+
+function promptFor(mode: GameMode): string {
+  if (mode === "quote") return randomQuote().text;
+  if (mode === "code") return randomSnippet().text;
+  return "";
+}
 
 export default function Home() {
   const [track, setTrack] = useState<TrackId>("lofi");
   const [mode, setMode] = useState<GameMode>("quote");
   const [started, setStarted] = useState(false);
   const [prompt, setPrompt] = useState("");
-  const [lastStats, setLastStats] = useState<GameStats | null>(null);
+  const [runId, setRunId] = useState(0);
+  const [stats, setStats] = useState<GameStats | null>(null);
+  const [intervals, setIntervals] = useState<number[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isBest, setIsBest] = useState(false);
 
   const start = () => {
-    const text =
-      mode === "quote"
-        ? randomQuote().text
-        : mode === "code"
-          ? randomSnippet().text
-          : "";
-    setPrompt(text);
-    setLastStats(null);
+    setPrompt(promptFor(mode));
+    setStats(null);
+    setIntervals([]);
+    setModalOpen(false);
     setStarted(true);
+  };
+
+  // Task 27: finish -> stats -> persist best + history -> modal.
+  const handleFinish = useCallback(
+    (s: GameStats, iv: number[]) => {
+      setStats(s);
+      setIntervals(iv);
+      const best = maybeSaveBest({ ...s, mode, track, date: new Date().toISOString() });
+      appendHistory({ ...s, mode, track, date: new Date().toISOString() });
+      setIsBest(best);
+      setModalOpen(true);
+    },
+    [mode, track]
+  );
+
+  // Task 28: replay / new prompt / exit.
+  const replay = () => {
+    setModalOpen(false);
+    setStats(null);
+    setRunId((n) => n + 1);
+  };
+  const newPrompt = () => {
+    setPrompt(promptFor(mode));
+    setModalOpen(false);
+    setStats(null);
+    setRunId((n) => n + 1);
+  };
+  const exit = () => {
+    setModalOpen(false);
+    setStarted(false);
   };
 
   if (!started) {
@@ -62,17 +100,24 @@ export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-12">
       <GameScreen
+        key={`${runId}-${prompt}`}
         track={track}
         mode={mode}
         prompt={prompt}
-        onExit={() => setStarted(false)}
-        onFinish={(stats) => setLastStats(stats)}
+        onExit={exit}
+        onFinish={handleFinish}
       />
-      {lastStats && (
-        <p className="text-sm text-zinc-400" aria-live="polite">
-          Done: {lastStats.wpm} WPM · {lastStats.accuracy}% · x{lastStats.maxCombo} (ResultModal lands in Task 26)
-        </p>
-      )}
+      <ResultModal
+        open={modalOpen}
+        stats={stats}
+        intervals={intervals}
+        track={track}
+        mode={mode}
+        isBest={isBest}
+        onReplay={replay}
+        onNew={newPrompt}
+        onExit={exit}
+      />
     </main>
   );
 }
