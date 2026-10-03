@@ -37,10 +37,10 @@ Legend: `[ ]` todo, `[~]` in-progress, `[x]` done (:tick-mark:).
 - [x] 24. Handle mobile hidden-input fallback + focus management
 
 ## Phase E — Results
-- [ ] 25. Build `features/results/components/RhythmGraph.tsx` SVG from rhythm data
-- [ ] 26. Build `features/results/components/ResultModal.tsx` vinyl/soundwave card: WPM, acc, combo, graph, replay/share/copy
-- [ ] 27. Wire completion flow: finish -> compute stats -> save best/history -> show modal
-- [ ] 28. Wire replay (same prompt) + new prompt + back-to-landing
+- [x] 25. Build `features/results/components/RhythmGraph.tsx` SVG from rhythm data
+- [x] 26. Build `features/results/components/ResultModal.tsx` vinyl/soundwave card: WPM, acc, combo, graph, replay/share/copy
+- [x] 27. Wire completion flow: finish -> compute stats -> save best/history -> show modal
+- [x] 28. Wire replay (same prompt) + new prompt + back-to-landing
 
 ## Phase F — Polish + Ship
 - [ ] 29. Add Framer Motion screen transitions landing<->play<->results
